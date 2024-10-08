@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  PROJECT_NAME: "Rector Simuleitor"
+
+build_job:
+  stage: build
+  script:
+    - echo "construyendo el proyecto ;) ..."
+    - echo "Add your build commands here"
+  only:
+    - main
+
+test_job:
+  stage: test
+  script:
+    - echo "Ejecutando pruebas ..."
+    - echo "Add your test commands here"
+    - pytest
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Desplegando app ..."
+    - echo "Add your deployment commands here"
+  only:
+    - main
