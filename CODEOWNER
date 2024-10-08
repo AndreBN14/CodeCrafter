@@ -1,0 +1,32 @@
+# Propietarios para la carpeta "Clientes"
+/Clientes/                 @gestion_relaciones_cliente_team @director_proyecto
+
+# Propietarios para las diferentes fases del proyecto "Rector Simuleitor"
+# Gestión
+/Desarrollo/Rector Simuleitor/Gestion/          @Andr314 #	@project_manager
+
+# Pruebas
+/Desarrollo/Rector Simuleitor/Pruebas/          @rodcz	 #	@qa_lead @qa_team
+
+# Análisis y diseño
+/Desarrollo/Rector Simuleitor/Análisis y diseño/ @rodcz  #	@analista_lead @analista_team
+
+# Esquemas de Base de Datos (dentro de Análisis y Diseño)
+/Desarrollo/Rector Simuleitor/Análisis y diseño/ER Base de datos/ @KarloToro #	@db_architect
+
+# Implementación: Backend
+/Desarrollo/Rector Simuleitor/Implementación/Backend/  @SernaAndrew @Andr314 @KarloToro #	@backend_lead @backend_dev
+
+# Implementación: Frontend
+/Desarrollo/Rector Simuleitor/Implementación/Frontend/ @DiegoGC1822 @JhonRiduth @#	@frontend_lead @frontend_dev
+
+# Documentación general del proyecto
+/Documentos/      @Andr314   		#  	@documentacion_lead
+
+# Lineas Base
+/Linea Base/         @Andr314 		# 	@configuracion_lead @configuracion_team
+
+# Archivos de configuración y CI/CD
+*.yml                @ci_cd_lead
+.gitlab-ci.yml       @ci_cd_lead
+README.md            @Andr314  		#	@project_manager
