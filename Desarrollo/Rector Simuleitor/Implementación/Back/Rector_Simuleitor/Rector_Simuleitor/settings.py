@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Apps.Core',
+    'Apps.Loggin',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +77,12 @@ WSGI_APPLICATION = 'Rector_Simuleitor.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Rector_Simuleitor',
+        'USER': 'root',
+        'PASSWORD': 'hVgmJjXgXzksNZPhVSqjoslvEhVsMXLN',
+        'HOST': 'autorack.proxy.rlwy.net',  # Por ejemplo: '192.168.1.10'
+        'PORT': '22756',  # El puerto por defecto de MySQL
     }
 }
 
