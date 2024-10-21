@@ -12,6 +12,9 @@ class Jugador(AbstractUser):
         nuevo= cls.objects.create(usuario=nombre,password=contraseña,pais=pais)
         return nuevo
     
+    def __str__(self):
+        identificador= str(self.usuario) +" "+ str(self.pais)
+        return identificador
 class Puntuacion(models.Model):
     puntuaciones = models.PositiveBigIntegerField()
     fecha = models.DateField(default=date.today)
@@ -37,12 +40,19 @@ class Puntuacion(models.Model):
             return True
         else:
             return False
+    def __str__(self):
+        identificador= str(self.jugador_id) +" "+ str(self.fecha)
+        return identificador
+
 
 class Eventos_Base(models.Model):
     evento_id=models.AutoField(primary_key=True)
     descripcion = models.TextField() #aqui va todo el textazo que necesita gpt para tener contexto
     elementos_afectados = models.JSONField(default=dict, blank=True)
-    #chin chen guan chin chin - _ - 
+
     def crear(cls,descrip,e_afectados):
         nuevo=cls.objects.create(descripcion=descrip,elementos_afectados=e_afectados)
         return nuevo
+    def __str__(self):
+        return self.evento_id
+    #chin chen guan chin chin - _ - 
