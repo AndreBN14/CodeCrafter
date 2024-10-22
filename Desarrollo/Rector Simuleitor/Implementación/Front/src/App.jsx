@@ -1,5 +1,5 @@
 function App() {
-  return <></>;
+  return <>Juego</>;
 }
 
 export default App;
