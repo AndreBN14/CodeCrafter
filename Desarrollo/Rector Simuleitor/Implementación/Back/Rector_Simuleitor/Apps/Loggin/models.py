@@ -4,9 +4,17 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class Jugador(AbstractUser):
     jugador_id = models.AutoField(primary_key=True)
-    #usuario = models.CharField(max_length=30)
-    #password = models.CharField(max_length=30)
+    usuario = models.CharField(max_length=30, unique=True)
+    password = models.CharField(max_length=30)
     pais = models.CharField(max_length=30)
+
+    # Esto deshabilita el campo username
+    USERNAME_FIELD = 'usuario'
+    REQUIRED_FIELDS = []  # Si necesitas otros campos obligatorios, los agregas aquí
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._meta.get_field('username').null = True
     
     def crear(cls,nombre,contraseña,pais):
         nuevo= cls.objects.create(usuario=nombre,password=contraseña,pais=pais)
