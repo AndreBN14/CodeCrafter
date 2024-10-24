@@ -1,73 +1,31 @@
 import un from "../assets/backgrounds/university-night.svg";
 import conf from "../assets/others/configuration.svg";
 import { MainLayout } from "../layouts/MainLayout";
+import { Link } from "react-router-dom";
+import { useEvent } from "../store/useEvent";
+
 export const Start = () => {
+  const { startGame, getEvent } = useEvent();
+
   return (
-    <MainLayout
-      background={un}
-      color="#C26464"
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "30%",
+    <MainLayout background={un} color="#C26464">
+      <Link className="flex h-1/3 items-center justify-center">
+        <img src={conf} alt="configuration" className="h-[50px] w-[50px]" />
+      </Link>
+      <div className="mt-[90px] flex h-[100px] flex-col items-center justify-center font-p leading-tight">
+        <h2 className="h-1/3 text-2xl">Año</h2>
+        <h1 className="h-2/5 text-3xl">2024</h1>
+      </div>
+      <Link
+        to="/game"
+        className="mt-[15px] flex h-[15%] w-full items-center justify-center bg-[#5A2F2F] font-s text-2xl text-white duration-300 hover:opacity-85"
+        onClick={() => {
+          startGame();
+          getEvent({ dinero: 100, aprobacion: 100 });
         }}
       >
-        <img
-          src={conf}
-          alt="configuration"
-          style={{
-            width: "50px",
-            height: "50px",
-          }}
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100px",
-          lineHeight: "1.2",
-          fontFamily: "Inknut Antiqua",
-          marginTop: "90px",
-        }}
-      >
-        <h2
-          style={{
-            margin: "0",
-            height: "30%",
-          }}
-        >
-          Año
-        </h2>
-        <h1
-          style={{
-            margin: "0",
-            height: "40%",
-          }}
-        >
-          2024
-        </h1>
-      </div>
-      <div
-        style={{
-          backgroundColor: "#5A2F2F",
-          height: "15%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          cursor: "pointer",
-          fontFamily: "Inria Sans",
-          fontSize: "20px",
-          marginTop: "15px",
-        }}
-      >
-        <p>Continuar</p>
-      </div>
+        Continuar
+      </Link>
     </MainLayout>
   );
 };
