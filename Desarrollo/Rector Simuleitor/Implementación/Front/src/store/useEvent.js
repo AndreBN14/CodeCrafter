@@ -18,7 +18,6 @@ export const useEvent = create((set) => ({
     try {
       const { data } = await axios.post(`${URL}/api/generar-evento/`, resource);
       const personaje = data.personaje;
-      console.log(personaje);
       switch (personaje) {
         case "estudiante":
           set({
