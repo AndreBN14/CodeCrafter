@@ -1,6 +1,6 @@
 // Desicion.jsx
 import React, { useContext } from "react";
-import { DateContext } from "../context/DateContext";
+import { DateContext } from "./DateContext";
 import { useResources } from "../store/useResources";
 import { useEvent } from "../store/useEvent";
 import { ButtonDe } from "./ui/ButtonDe";
