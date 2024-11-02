@@ -5,6 +5,7 @@ import { useEvent } from "./store/useEvent";
 import { Navigate } from "react-router-dom";
 import { useResources } from "./store/useResources";
 import { useEffect } from "react";
+import { DateProvider } from "./context/DateContext"; // Asegúrate de que la ruta sea correcta
 
 function App() {
   const { start, event } = useEvent();
@@ -17,14 +18,17 @@ function App() {
   }, [event]);
 
   return (
-    <Routes>
-      <Route
-        path="/game"
-        element={start ? <Game /> : <Navigate to="/start" />}
-      />
-      <Route path="/start" element={<Start />} />
-    </Routes>
+    <DateProvider>
+      <Routes>
+        <Route
+          path="/game"
+          element={start ? <Game /> : <Navigate to="/start" />}
+        />
+        <Route path="/start" element={<Start />} />
+      </Routes>
+    </DateProvider>
   );
 }
 
 export default App;
+
