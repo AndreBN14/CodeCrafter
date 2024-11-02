@@ -1,4 +1,10 @@
+// ManagamentDays.jsx
+import React, { useContext } from "react";
+import { DateContext } from "../context/DateContext";
+
 export const ManagamentDays = () => {
+  const { day, month } = useContext(DateContext);
+
   return (
     <section
       className="dateSurvived"
@@ -20,7 +26,7 @@ export const ManagamentDays = () => {
           color: "white",
         }}
       >
-        2 meses y 3 días ejerciendo
+        {month} meses y {day} días ejerciendo
       </h2>
     </section>
   );
