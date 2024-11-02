@@ -1,6 +1,6 @@
 // ManagamentDays.jsx
 import React, { useContext } from "react";
-import { DateContext } from "../context/DateContext";
+import { DateContext } from "./DateContext";
 
 export const ManagamentDays = () => {
   const { day, month } = useContext(DateContext);
