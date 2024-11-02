@@ -2,20 +2,14 @@ import un from "../assets/backgrounds/university-night.svg";
 import conf from "../assets/others/configuration.svg";
 import { MainLayout } from "../layouts/MainLayout";
 import { Link } from "react-router-dom";
-import { useConfig } from "../store/useConfig";
 import { useEvent } from "../store/useEvent";
 
 export const Start = () => {
-  const { setShowSettings } = useConfig();
-
   const { startGame, getEvent } = useEvent();
 
   return (
     <MainLayout background={un} color="#C26464">
-      <Link
-        className="flex h-1/3 items-center justify-center"
-        onClick={() => setShowSettings(true)}
-      >
+      <Link className="flex h-1/3 items-center justify-center">
         <img src={conf} alt="configuration" className="h-[50px] w-[50px]" />
       </Link>
       <div className="mt-[90px] flex h-[100px] flex-col items-center justify-center font-p leading-tight">

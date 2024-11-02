@@ -5,7 +5,7 @@ import { useEvent } from "./store/useEvent";
 import { Navigate } from "react-router-dom";
 import { useResources } from "./store/useResources";
 import { useEffect } from "react";
-import { DateProvider } from "./components/DateContext"; // Asegúrate de que la ruta sea correcta
+import { DateProvider } from "./context/DateContext"; // Asegúrate de que la ruta sea correcta
 
 function App() {
   const { start, event } = useEvent();
@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App;
+

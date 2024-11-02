@@ -3,8 +3,8 @@ import { PanelResources } from "../components/PanelResources";
 import { Scenario } from "../components/Scenario";
 import { ManagamentDays } from "../components/ManagamentDays";
 import { Desicion } from "../components/Decision";
-import ud from "../assets/backgrounds/university-day.svg";
 import { useEvent } from "../store/useEvent";
+import ud from "../assets/backgrounds/university-day.svg";
 
 export const Game = () => {
   const { error, loading } = useEvent();
