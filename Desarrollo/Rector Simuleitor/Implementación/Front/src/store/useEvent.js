@@ -16,7 +16,7 @@ export const useEvent = create((set) => ({
   getEvent: async (resource) => {
     set({ loading: true });
     try {
-      const { data } = await axios.post(`${URL}/api/generar-evento/`, resource);
+      const { data } = await axios.post(`${URL}/api/generar-evento`, resource);
       const personaje = data.personaje;
       switch (personaje) {
         case "estudiante":
