@@ -1,13 +1,14 @@
 // Desicion.jsx
-import React, { useContext } from "react";
-import { DateContext } from "./DateContext";
+import React from "react";
+import { useDate } from "../store/useDate";
 import { useResources } from "../store/useResources";
 import { useEvent } from "../store/useEvent";
 import { ButtonDe } from "./ui/ButtonDe";
 
 export const Desicion = () => {
-  const { incrementDate } = useContext(DateContext);
-  const { money, people, impactMoney, impactPeople, setMoney, setPeople } = useResources();
+  const { incrementDate } = useDate();
+  const { money, people, impactMoney, impactPeople, setMoney, setPeople } =
+    useResources();
   const { event, getEvent } = useEvent();
 
   const outOfResources = () => {

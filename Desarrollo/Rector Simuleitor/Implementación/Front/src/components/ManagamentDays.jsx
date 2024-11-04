@@ -1,32 +1,15 @@
 // ManagamentDays.jsx
-import React, { useContext } from "react";
-import { DateContext } from "./DateContext";
+import React from "react";
+import { useDate } from "../store/useDate";
 
 export const ManagamentDays = () => {
-  const { day, month } = useContext(DateContext);
+  const { day, month } = useDate();
 
   return (
-    <section
-      className="dateSurvived"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        textAlign: "center",
-        lineHeight: "1.5",
-      }}
-    >
-      <h1 style={{ fontFamily: "Inknut Antiqua", margin: "0", color: "white" }}>
-        2024
-      </h1>
-      <h2
-        style={{
-          fontFamily: "Inria Sans",
-          marginTop: "10px",
-          margin: "0",
-          color: "white",
-        }}
-      >
-        {month} meses y {day} días ejerciendo
+    <section className="flex flex-col items-center text-center leading-normal">
+      <h1 className="font-p text-2xl text-white">2024</h1>
+      <h2 className="mt-1 font-s text-2xl text-white">
+        {month} meses y {day} días ejerciendo
       </h2>
     </section>
   );
