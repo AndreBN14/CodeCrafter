@@ -7,7 +7,7 @@ export const MainLayout = ({ children, background, color }) => {
       }}
     >
       <div
-        className="h-full w-[35%]"
+        className="h-full w-[538px]"
         style={{
           backgroundColor: color,
         }}

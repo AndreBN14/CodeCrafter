@@ -12,7 +12,7 @@ export const Desicion = () => {
   const { event, getEvent } = useEvent();
 
   const outOfResources = () => {
-    return money < 0 || people < 0;
+    return money <= 0 || people <= 0;
   };
 
   const consecuence = (resource, action) => {
