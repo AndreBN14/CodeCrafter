@@ -9,7 +9,7 @@ export const ButtonDe = ({
 }) => {
   return (
     <button
-      className="w-2/5 rounded-lg border-none shadow-[0px_4px_8px_rgba(0,0,0,0.3)] transition duration-300 ease-in-out hover:scale-105 hover:shadow-[0px_6px_12px_rgba(0,0,0,0.4)]"
+      className="w-2/5 rounded-lg border-none p-2 shadow-[0px_4px_8px_rgba(0,0,0,0.3)] transition duration-300 ease-in-out hover:scale-105 hover:shadow-[0px_6px_12px_rgba(0,0,0,0.4)]"
       style={{
         backgroundColor: outOfResources() ? bg : "#D9D9D9",
       }}
