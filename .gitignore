@@ -1,0 +1,17 @@
+# Ignorar entornos virtuales
+venv/
+env/
+
+# Ignorar archivos de configuración locales
+*.env
+.env
+
+# Ignorar archivos generados por Python
+__pycache__/
+*.pyc
+
+# Ignorar archivos de migraciones de Django
+migrations/
+
+# Otros archivos que quieras ignorar
+*.log
