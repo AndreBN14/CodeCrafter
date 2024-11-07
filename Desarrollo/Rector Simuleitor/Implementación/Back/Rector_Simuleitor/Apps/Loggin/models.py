@@ -24,7 +24,7 @@ class Jugador(AbstractUser):
         identificador= str(self.usuario) +" "+ str(self.pais)
         return identificador
 class Puntuacion(models.Model):
-    puntuaciones = models.PositiveBigIntegerField() #me equivoque al nombrarla :( tomenlo como si dijiera score o puntuacion, no es una lista o coleccion, es un elemento nada mas
+    score = models.PositiveBigIntegerField(db_column='puntuaciones') 
     fecha = models.DateField(default=date.today)
     dias = models.PositiveSmallIntegerField()
     isTheBest = models.BooleanField()
@@ -37,7 +37,7 @@ class Puntuacion(models.Model):
         self.recursos_criticos=recursos_criticos
         self.jugador_id=jugador_id
         self.isTheBest=False
-        self.puntuaciones=None
+        self.score=0
         self.recursos_criticos={}
     
     """
@@ -52,15 +52,20 @@ class Puntuacion(models.Model):
         dinero = self.recursos_criticos.get('dinero', 0)  # Valor por defecto
         aprobacion = self.recursos_criticos.get('aprobacion', 0)  # Valor por defecto
         puntuacion_recursos = (dinero * 37) + (aprobacion * 53)
-        self.puntuaciones = puntuacion_dias + puntuacion_recursos
+        self.score = puntuacion_dias + puntuacion_recursos 
 
     def is_The_Best(self,jugador_id):
         puntuaciones=list(Jugador.objects.get(jugador_id=jugador_id).puntajes.all())
-        if not puntuaciones:
+        if not puntuaciones: #osea es el primer registro entonce es el mejor
             self.isTheBest=True
         else:
-            puntuaciones=sorted(puntuaciones, key=lambda p: p.puntuaciones) #orden ascendente
-            self.is_The_Best = self.puntuaciones > puntuaciones[-1]
+            puntuaciones=sorted(puntuaciones, key=lambda p: p.score) #orden ascendente
+            if self.score > puntuaciones[-1].score:
+                puntuaciones[-1].isTheBest = False #dejo de ser el mejor puntaje
+                self.is_The_Best = True
+            else:
+                self.is_The_Best = False
+
 
     def __str__(self):
         identificador= str(self.jugador_id) +" "+ str(self.fecha)
