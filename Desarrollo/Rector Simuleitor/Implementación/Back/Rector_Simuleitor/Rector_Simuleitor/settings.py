@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
-import pymysql
-pymysql.install_as_MySQLdb()
+from dotenv import load_dotenv
+#import pymysql
+#pymysql.install_as_MySQLdb()
 
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'Apps.Core',
     'Apps.Loggin',
+    'Apps.api',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +92,14 @@ DATABASES = {
         'PASSWORD': 'hVgmJjXgXzksNZPhVSqjoslvEhVsMXLN',
         'HOST': 'autorack.proxy.rlwy.net',  # Por ejemplo: '192.168.1.10'
         'PORT': '22756',  # El puerto por defecto de MySQL
+        'OPTIONS': {
+            #'ssl': {
+            #    'ca': os.path.join(direccionSLL,'ca-cert.pem'),
+            #    'cert': os.path.join(direccionSLL,'client-cert.pem'),
+            #    'key': os.path.join(direccionSLL,'client-key.pem'),
+            #    'ssl_verify_cert': False, 
+            #},
+        },
     }
 }
 
@@ -134,5 +146,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-
+    'http://localhost:5173',
 ]

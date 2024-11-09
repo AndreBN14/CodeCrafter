@@ -1,15 +1,18 @@
+// Desicion.jsx
+import React from "react";
+import { useDate } from "../store/useDate";
 import { useResources } from "../store/useResources";
 import { useEvent } from "../store/useEvent";
 import { ButtonDe } from "./ui/ButtonDe";
 
 export const Desicion = () => {
+  const { incrementDate } = useDate();
   const { money, people, impactMoney, impactPeople, setMoney, setPeople } =
     useResources();
-
   const { event, getEvent } = useEvent();
 
   const outOfResources = () => {
-    return money < 0 || people < 0;
+    return money <= 0 || people <= 0;
   };
 
   const consecuence = (resource, action) => {
@@ -19,6 +22,9 @@ export const Desicion = () => {
     } else {
       resource === "dinero" ? impactMoney(action) : impactPeople(action);
       getEvent({ dinero: money, aprobacion: people });
+
+      // Incrementar el día y el mes
+      incrementDate();
     }
   };
 
