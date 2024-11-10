@@ -4,7 +4,7 @@ import conf from "../assets/others/configuration.svg";
 import { Settings } from "../components/Settings";
 import { Link } from "react-router-dom";
 
-export const InitialLayout = ({ tittle, children, confb, ret, mt }) => {
+export const InitialLayout = ({ tittle, children, confb, ret }) => {
   const { showSettings, setShowSettings } = useConfig();
 
   return (
@@ -14,11 +14,10 @@ export const InitialLayout = ({ tittle, children, confb, ret, mt }) => {
         backgroundImage: `url(${un})`,
       }}
     >
-      <h1 className="mt-16 text-center font-p text-8xl text-white">{tittle}</h1>
-      <div
-        className="flex h-[60%] w-[40%] flex-col items-center"
-        style={{ marginTop: mt }}
-      >
+      <h1 className="mt-16 text-center font-p text-5xl text-white md:text-7xl lg:text-8xl">
+        {tittle}
+      </h1>
+      <div className="mt-[60px] flex h-[60%] w-[80%] flex-col items-center md:mt-[80px] md:w-[50%] lg:w-[40%]">
         {children}
       </div>
 

@@ -4,7 +4,7 @@ import { FormField } from "../components/ui/FormField";
 
 export const Login = () => {
   return (
-    <InitialLayout tittle="Iniciar Sesión" mt="130px">
+    <InitialLayout tittle="Iniciar Sesión">
       <FormField label="Usuario" type="text" id="username" />
       <FormField label="Contraseña" type="password" id="password" />
       <div className="mt-24 flex w-full gap-2">
