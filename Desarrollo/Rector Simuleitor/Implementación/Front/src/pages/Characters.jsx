@@ -31,43 +31,14 @@ const characters = [
 
 export const Characters = () => {
   return (
-    <MainLayout
-      background={ua}
-      color="#110909"
-    >
-      <div
-        style={{
-          width: "95%",
-          height: "95%",
-          backgroundColor: "#231212",
-          border: "1px solid white",
-          margin: "19px auto",
-        }}
-      >
-        <h1
-          style={{
-            fontFamily: "Inknut Antiqua",
-            color: "white",
-            marginLeft: "15px",
-            marginTop: "15px",
-          }}
-        >
+    <MainLayout background={ua} color="#110909">
+      <div className="mx-auto my-[19px] h-[95%] w-[95%] border border-white bg-[#231212]">
+        <h1 className="ml-[15px] mt-[15px] font-p text-3xl text-white">
           Personajes
         </h1>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            justifyItems: "center",
-            alignItems: "center",
-            gap: "20px",
-          }}
-        >
+        <div className="mt-5 grid grid-cols-2 items-center justify-center gap-5">
           {characters.map((character) => (
-            <LockedCharacter
-              key={character.name}
-              character={character}
-            />
+            <LockedCharacter key={character.name} character={character} />
           ))}
         </div>
       </div>

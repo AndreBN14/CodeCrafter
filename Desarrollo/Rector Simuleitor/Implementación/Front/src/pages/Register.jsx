@@ -4,7 +4,7 @@ import { FormField } from "../components/ui/FormField";
 
 export const Register = () => {
   return (
-    <InitialLayout tittle="Registrarse" mt="80px">
+    <InitialLayout tittle="Registrarse">
       <FormField label="Usuario" type="text" id="username" />
       <FormField label="Contraseña" type="password" id="password" />
       <FormField label="Confirmar Contraseña" type="password" id="password" />
