@@ -1,20 +1,26 @@
 from django.db import models
 from datetime import date
-from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
-class Jugador(AbstractUser):
+
+class JugadorManager(BaseUserManager):
+    def create_user(self, usuario, password=None):
+        jugador = self.model(usuario=usuario) #lo renombro porque en mi modelo configure ese parametro y ya cumple con ser unico
+        jugador.set_password(password)
+        #jugador.date_joined = timezone.now()
+        jugador.save(using=self._db)
+        return jugador
+
+class Jugador(AbstractBaseUser):
     jugador_id = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=30, unique=True)
-    password = models.CharField(max_length=30)
-    pais = models.CharField(max_length=30)
-
-    # Esto deshabilita el campo username
+    #password = models.CharField(max_length=256) 
+    pais = models.CharField(max_length=50)
+    date_joined = models.DateTimeField(default=timezone.now, verbose_name="Fecha de registro")
+    objects = JugadorManager()
     USERNAME_FIELD = 'usuario'
     REQUIRED_FIELDS = []  # Si necesitas otros campos obligatorios, los agregas aquí
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._meta.get_field('username').null = True
     
     def crear(cls,nombre,contraseña,pais): #crea instancia del objeto y la guarda en la bdd, si ya se tiene la instancia es mejor usar .save()
         nuevo= cls.objects.create(usuario=nombre,password=contraseña,pais=pais)
@@ -39,13 +45,6 @@ class Puntuacion(models.Model):
         self.isTheBest=False
         self.score=0
         self.recursos_criticos={}
-    
-    """
-            SE REEMPLAZA ESTE METODO POR .save() ya que no se guardara una instacia incompleta, de forma que ahorramos I/O en la bdd
-        def guardarEnBdd(cls,dias,recursos_cri,jugador_id):#Metodo de la clase para guardar en la bdd
-        nuevaPuntuacion=cls.objects.create(dias=dias,recursos_criticos=recursos_cri,jugador_id=jugador_id) #guarda en la base de datos el objeto
-        return nuevaPuntuacion
-    """
 
     def calcularPuntuacion(self):
         puntuacion_dias = self.dias * 1000
@@ -70,7 +69,6 @@ class Puntuacion(models.Model):
     def __str__(self):
         identificador= str(self.jugador_id) +" "+ str(self.fecha)
         return identificador
-
 
 class Eventos_Base(models.Model):
     evento_id=models.AutoField(primary_key=True)
