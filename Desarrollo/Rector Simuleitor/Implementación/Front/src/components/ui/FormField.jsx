@@ -1,4 +1,4 @@
-export const FormField = ({ label, type, id }) => {
+export const FormField = ({ label, type, id}) => {
   return (
     <div className="flex w-full items-center justify-center gap-2">
       <label
