@@ -2,9 +2,11 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.authtoken.models import Token
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from .serializer import JugadorSerializer
 from .models import Jugador
@@ -17,6 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
 @api_view(['POST'])
 def register(request):
     serializer = JugadorSerializer(data=request.data)
+    
     if serializer.is_valid():
         user = serializer.save()
         user.is_active = True
@@ -25,17 +28,18 @@ def register(request):
         user.date_joined = timezone.now()
         user.save()
         
-        login(request, user)  # Autentica y crea la sesión
-        return Response({'message': 'Registro exitoso'}, status=status.HTTP_201_CREATED)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        token = Token.objects.create(user=user)
+        return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
     
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')  # Cambia a la URL a la que quieres redirigir
-    return render(request, 'login.html')
+    user = get_object_or_404(Jugador, usuario=request.data['usuario'])
+    
+    if user.check_password(request.data['password']):
+        token, created = Token.objects.get_or_create(user=user)
+        serializer = JugadorSerializer(instance=user)
+        return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_200_OK)
+    
+    return Response({'error': 'Invalid username or password'}, status=status.HTTP_400_BAD_REQUEST)
