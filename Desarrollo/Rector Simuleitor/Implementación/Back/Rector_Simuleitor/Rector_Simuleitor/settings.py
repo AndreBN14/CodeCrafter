@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-=qs^ruloqwk7q0e9p(!$ankgisty0h+11+jaxucv6%4_6b9^jo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'Loggin.Jugador'
 
