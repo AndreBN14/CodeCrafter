@@ -1,6 +1,6 @@
 import { InitialLayout } from "../layouts/InitialLayout";
 import { Button } from "../components/ui/Button";
-import { FormFieldGozu } from "../components/ui/FormFieldGozu.jsx";
+import { FormFieldGozu } from "../components/ui/FormFielGozu.jsx";
 import { useState } from "react";
 
 export const Login = () => {
@@ -9,7 +9,7 @@ export const Login = () => {
 
   const handleLogin = async () => {
     console.log("Botón presionado");
-    console.log("Datos de entrada:", { username, password });  // Verifica los datos
+    console.log("Datos de entrada:", { username, password }); // Verifica los datos
     alert("Boton vive ");
 
     try {
@@ -53,9 +53,7 @@ export const Login = () => {
         <Button width="half" to="/register">
           Registrarse
         </Button>
-        <button onClick={handleLogin}>
-          Iniciar
-        </button>
+        <button onClick={handleLogin}>Iniciar</button>
       </div>
     </InitialLayout>
   );
