@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class Jugador(AbstractUser):
     jugador_id = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=30, unique=True)
-    password = models.CharField(max_length=30)
+    password = models.CharField(max_length=128)
     pais = models.CharField(max_length=30)
 
     # Esto deshabilita el campo username
@@ -23,6 +23,7 @@ class Jugador(AbstractUser):
     def __str__(self):
         identificador= str(self.usuario) +" "+ str(self.pais)
         return identificador
+    
 class Puntuacion(models.Model):
     score = models.PositiveBigIntegerField(db_column='puntuaciones') 
     fecha = models.DateField(default=date.today)
