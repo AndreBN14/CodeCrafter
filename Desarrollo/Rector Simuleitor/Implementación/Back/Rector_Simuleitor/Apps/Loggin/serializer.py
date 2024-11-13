@@ -3,10 +3,6 @@ from .models import Jugador,Puntuacion,Eventos_Base
 from django.contrib.auth.hashers import make_password
 from .models import Jugador, Puntuacion, Eventos_Base
 
-class PuntuacionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Puntuacion
-        fields = '__all__'  # O puedes especificar una lista de campos
 
 class JugadorSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -24,7 +20,22 @@ class JugadorSerializer(serializers.ModelSerializer):
         user = Jugador.objects.create(**validated_data)
         return user
 
+class JugadorSerializerRanking(serializers.ModelSerializer):
+
+    class Meta:
+        model = Jugador
+        fields = ['usuario', 'pais']
+
+class PuntuacionSerializer(serializers.ModelSerializer):
+    jugador = JugadorSerializerRanking(read_only=True, source='jugador_id')
+    #jugador_id = serializers.IntegerField(source='jugador_id.id', read_only=True)
+    #print(f"wazza {jugador_id}") ya no usados
+    class Meta:
+        model = Puntuacion
+        #, 'jugador'
+        fields = ['score', 'fecha', 'dias', 'isTheBest', 'recursos_criticos','jugador'] 
+
 class EventosBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Eventos_Base
-        fields = '__all__'  # O puedes especificar una lista de campos
+        fields = '__all__'
