@@ -3,8 +3,9 @@ import un from "../assets/backgrounds/university-night.svg";
 import conf from "../assets/others/configuration.svg";
 import { Settings } from "../components/Settings";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
 
-export const InitialLayout = ({ tittle, children, confb, ret }) => {
+export const InitialLayout = ({ tittle, children, confb, ret, reg }) => {
   const { showSettings, setShowSettings } = useConfig();
 
   return (
@@ -14,12 +15,15 @@ export const InitialLayout = ({ tittle, children, confb, ret }) => {
         backgroundImage: `url(${un})`,
       }}
     >
-      <h1 className="mt-16 text-center font-p text-5xl text-white md:text-7xl lg:text-8xl">
+      <h1
+        className={clsx(
+          "text-center font-p text-5xl text-white md:text-7xl lg:text-8xl",
+          reg ? "mt-5" : "mt-16",
+        )}
+      >
         {tittle}
       </h1>
-      <div className="mt-[60px] flex h-[60%] w-[80%] flex-col items-center md:mt-[80px] md:w-[50%] lg:w-[40%]">
-        {children}
-      </div>
+      {children}
 
       {/* Mostrar página de configuración */}
       {showSettings && <Settings />}

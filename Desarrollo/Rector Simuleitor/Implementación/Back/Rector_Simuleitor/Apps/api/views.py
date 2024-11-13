@@ -19,7 +19,7 @@ class ChatGPTAPIView(APIView):
 
         {{
             "evento": "Descripción corta del evento.",
-            "personaje": "profesora" | "estudiante" | "periodista" | "secretaria",
+            "personaje": "profesora" | "estudiante" | "periodista" | "decano",
             "decision1": {{
                 "decision": "Descripción de la primera decision basada en el evento.",
                 "consecuencia": {{

@@ -3,13 +3,18 @@ import conf from "../assets/others/configuration.svg";
 import { MainLayout } from "../layouts/MainLayout";
 import { Link } from "react-router-dom";
 import { useEvent } from "../store/useEvent";
+import { useConfig } from "../store/useConfig";
 
 export const Start = () => {
   const { startGame, getEvent } = useEvent();
+  const { setShowSettings } = useConfig();
 
   return (
     <MainLayout background={un} color="#C26464">
-      <Link className="flex h-1/3 items-center justify-center">
+      <Link
+        className="flex h-1/3 items-center justify-center"
+        onClick={() => setShowSettings(true)}
+      >
         <img src={conf} alt="configuration" className="h-[50px] w-[50px]" />
       </Link>
       <div className="mt-[90px] flex h-[100px] flex-col items-center justify-center font-p leading-tight">

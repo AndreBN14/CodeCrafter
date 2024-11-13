@@ -5,8 +5,9 @@ import st from "../assets/characters/student.svg";
 import dc from "../assets/characters/dean.svg";
 import tc from "../assets/characters/teacher.svg";
 import jr from "../assets/characters/journalist.svg";
+import { useEffect, useState } from "react";
 
-const characters = [
+const initialCharacters = [
   {
     name: "Decano",
     img: dc,
@@ -15,12 +16,12 @@ const characters = [
   {
     name: "Estudiante",
     img: st,
-    unlock: true,
+    unlock: false,
   },
   {
     name: "Profesora",
     img: tc,
-    unlock: true,
+    unlock: false,
   },
   {
     name: "Periodista",
@@ -30,6 +31,24 @@ const characters = [
 ];
 
 export const Characters = () => {
+  const [characters, setCharacters] = useState(initialCharacters);
+
+  useEffect(() => {
+    const unlockedCharacters = JSON.parse(
+      localStorage.getItem("unlockedCharacters"),
+    );
+    if (unlockedCharacters) {
+      const updatedCharacters = characters.map((character) => {
+        if (unlockedCharacters.includes(character.name.toLowerCase())) {
+          return { ...character, unlock: true };
+        }
+        return character;
+      });
+
+      setCharacters(updatedCharacters);
+    }
+  }, []);
+
   return (
     <MainLayout background={ua} color="#110909">
       <div className="mx-auto my-[19px] h-[95%] w-[95%] border border-white bg-[#231212]">

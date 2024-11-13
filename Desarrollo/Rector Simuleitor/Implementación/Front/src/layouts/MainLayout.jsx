@@ -1,4 +1,8 @@
+import { Settings } from "../components/Settings";
+import { useConfig } from "../store/useConfig";
+
 export const MainLayout = ({ children, background, color }) => {
+  const { showSettings } = useConfig();
   return (
     <div
       className="flex h-screen justify-center bg-cover bg-center bg-no-repeat"
@@ -14,6 +18,9 @@ export const MainLayout = ({ children, background, color }) => {
       >
         {children}
       </div>
+
+      {/* Mostrar página de configuración */}
+      {showSettings && <Settings />}
     </div>
   );
 };

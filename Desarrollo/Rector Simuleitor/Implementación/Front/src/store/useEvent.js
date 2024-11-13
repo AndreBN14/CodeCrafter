@@ -18,6 +18,18 @@ export const useEvent = create((set) => ({
     try {
       const { data } = await axios.post(`${URL}/api/generar-evento`, resource);
       const personaje = data.personaje;
+
+      const unlockedCharacters =
+        JSON.parse(localStorage.getItem("unlockedCharacters")) || [];
+
+      if (!unlockedCharacters.includes(personaje)) {
+        unlockedCharacters.push(personaje);
+        localStorage.setItem(
+          "unlockedCharacters",
+          JSON.stringify(unlockedCharacters),
+        );
+      }
+
       switch (personaje) {
         case "estudiante":
           set({
