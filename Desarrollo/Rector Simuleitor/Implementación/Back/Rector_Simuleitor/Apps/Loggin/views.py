@@ -8,8 +8,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from .serializer import JugadorSerializer
-from .models import Jugador
+from .serializer import JugadorSerializer, PuntuacionSerializer
+from .models import Jugador, Puntuacion
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -43,3 +43,16 @@ def login_view(request):
         return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_200_OK)
     
     return Response({'error': 'Invalid username or password'}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def top_scores(request):
+    top_scores = Puntuacion.objects.order_by('-score')[:20]
+    serializer = PuntuacionSerializer(top_scores, many=True)
+    debug_message = "WIIIIIIIIIIIIIIIIIIIIIIIIII :)."
+
+    # Puedes devolver los datos como un diccionario, incluyendo tu mensaje
+    response_data = {
+        "message": debug_message,  # El mensaje de depuración
+        "data": serializer.data     # Los datos de las puntuaciones
+    }
+    return Response(response_data)

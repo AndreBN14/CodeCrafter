@@ -8,15 +8,15 @@ class Jugador(AbstractUser):
     password = models.CharField(max_length=128)
     pais = models.CharField(max_length=30)
 
-    # Esto deshabilita el campo username
+
     USERNAME_FIELD = 'usuario'
-    REQUIRED_FIELDS = []  # Si necesitas otros campos obligatorios, los agregas aquí
+    REQUIRED_FIELDS = []  
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._meta.get_field('username').null = True
     
-    def crear(cls,nombre,contraseña,pais): #crea instancia del objeto y la guarda en la bdd, si ya se tiene la instancia es mejor usar .save()
+    def crear(cls,nombre,contraseña,pais): 
         nuevo= cls.objects.create(usuario=nombre,password=contraseña,pais=pais)
         return nuevo
     
@@ -32,6 +32,7 @@ class Puntuacion(models.Model):
     recursos_criticos = models.JSONField(default=dict, blank=True)
     jugador_id = models.ForeignKey(Jugador, on_delete=models.CASCADE,db_column="jugador_ID",related_name="puntajes")
 
+    """
     def __init__(self,dias,recursos_criticos,jugador_id, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.dias=dias
@@ -39,15 +40,9 @@ class Puntuacion(models.Model):
         self.jugador_id=jugador_id
         self.isTheBest=False
         self.score=0
-        self.recursos_criticos={}
+        self.recursos_criticos={}   
+    """
     
-    """
-            SE REEMPLAZA ESTE METODO POR .save() ya que no se guardara una instacia incompleta, de forma que ahorramos I/O en la bdd
-        def guardarEnBdd(cls,dias,recursos_cri,jugador_id):#Metodo de la clase para guardar en la bdd
-        nuevaPuntuacion=cls.objects.create(dias=dias,recursos_criticos=recursos_cri,jugador_id=jugador_id) #guarda en la base de datos el objeto
-        return nuevaPuntuacion
-    """
-
     def calcularPuntuacion(self):
         puntuacion_dias = self.dias * 1000
         dinero = self.recursos_criticos.get('dinero', 0)  # Valor por defecto
