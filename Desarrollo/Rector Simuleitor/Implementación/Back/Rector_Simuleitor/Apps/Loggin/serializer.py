@@ -13,7 +13,7 @@ class JugadorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Jugador
-        fields = ['usuario', 'password', 'pais', 'email', 'first_name', 'last_name']
+        fields = ['usuario', 'password', 'pais', 'email', 'first_name', 'last_name', 'jugador_id']
 
     def create(self, validated_data):
         # Asignar el campo 'usuario' a 'username'
@@ -37,7 +37,7 @@ class PuntuacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Puntuacion
         #, 'jugador'
-        fields = ['score', 'fecha', 'dias', 'isTheBest', 'recursos_criticos','jugador'] 
+        fields = ['score', 'fecha', 'dias', 'recursos_criticos','jugador'] 
         
 class EventosBaseSerializer(serializers.ModelSerializer):
     class Meta:

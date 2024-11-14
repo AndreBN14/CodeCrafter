@@ -16,18 +16,9 @@ export const ButtonDe = ({
       onClick={onClick}
     >
       {outOfResources() ? (
-        isReplay ? (
-          <h3 className="text-center font-s text-xl font-bold text-white">
-            Reintentar
-          </h3>
-        ) : (
-          <Link
-            to="/"
-            className="text-center font-s text-xl font-bold text-white"
-          >
-            Volver al menu
-          </Link>
-        )
+        <h3 className="text-center font-s text-xl font-bold text-white">
+          {isReplay ? "Reintentar" : "Volver al menu"}
+        </h3>
       ) : (
         <h3 className="text-center font-s font-bold">{decision}</h3>
       )}

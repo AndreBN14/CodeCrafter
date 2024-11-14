@@ -72,4 +72,5 @@ export const useEvent = create((set) => ({
     }
   },
   startGame: () => set({ start: true }),
+  restartGame: () => set({ start: false }),
 }));
