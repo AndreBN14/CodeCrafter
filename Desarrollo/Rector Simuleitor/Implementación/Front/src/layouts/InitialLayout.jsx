@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 
 export const InitialLayout = ({ tittle, children, confb, ret, reg }) => {
-  const { showSettings, setShowSettings } = useConfig();
+  const { showSettings, setShowSettings, playSoundEffect } = useConfig();
 
   return (
     <div
@@ -32,14 +32,20 @@ export const InitialLayout = ({ tittle, children, confb, ret, reg }) => {
       {confb && (
         <div
           className="absolute bottom-5 right-10 cursor-pointer rounded-3xl bg-[#d77b74] p-2 transition-colors duration-300 hover:bg-[#b95f5b]"
-          onClick={() => setShowSettings(true)}
+          onClick={() => {
+            setShowSettings(true);
+            playSoundEffect();
+          }}
         >
           <img src={conf} alt="configuration" className="h-[50px] w-[50px]" />
         </div>
       )}
 
       {ret && (
-        <button className="absolute bottom-5 left-10 bg-[#d77b74] p-4 font-p text-2xl text-white">
+        <button
+          className="absolute bottom-5 left-10 bg-[#d77b74] p-4 font-p text-2xl text-white"
+          onClick={() => playSoundEffect()}
+        >
           <Link to="/">Volver</Link>
         </button>
       )}
