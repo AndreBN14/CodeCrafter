@@ -44,6 +44,7 @@ def login_view(request):
 def top_scores(request):
     top_scores = Puntuacion.objects.order_by('-score')[:20]
     serializer = PuntuacionSerializer(top_scores, many=True)
+
     
     return Response(serializer.data)
     
@@ -63,4 +64,3 @@ def save_score(request):
     
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
