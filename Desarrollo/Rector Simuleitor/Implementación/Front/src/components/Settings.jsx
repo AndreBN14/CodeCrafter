@@ -1,5 +1,5 @@
 import { useConfig } from "../store/useConfig";
-import { Link } from "react-router-dom"; // Import Link to handle the routing
+import { Link } from "react-router-dom";
 
 export const Settings = () => {
   const { toggleMusic, playMusic, setShowSettings } = useConfig();
@@ -45,7 +45,11 @@ export const Settings = () => {
       </div>
       {/* New button for Characters page */}
       <div className="absolute bottom-4 left-4">
-        <Link to="/characters" className="flex items-center text-lg bg-gray-700 rounded-lg p-2">
+        <Link
+          to="/characters"
+          className="flex items-center rounded-lg bg-gray-700 p-2 text-lg"
+          onClick={() => setShowSettings(false)}
+        >
           👨‍🎨 Personajes
         </Link>
       </div>

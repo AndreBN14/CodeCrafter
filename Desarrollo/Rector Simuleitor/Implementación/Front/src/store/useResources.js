@@ -27,6 +27,5 @@ export const useResources = create((set) => ({
         people: newPeople,
       };
     }),
-  setMoney: (value) => set(() => ({ money: value })),
-  setPeople: (value) => set(() => ({ people: value })),
+  reset: () => set({ money: 100, people: 100 }),
 }));
