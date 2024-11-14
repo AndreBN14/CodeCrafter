@@ -6,4 +6,4 @@ from Apps.Loggin.models import Jugador
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = Jugador
-        fields = ('username', 'password1', 'password2', 'pais')
+        fields = ('usuario', 'password1', 'password2', 'pais', 'email', 'first_name', 'last_name')

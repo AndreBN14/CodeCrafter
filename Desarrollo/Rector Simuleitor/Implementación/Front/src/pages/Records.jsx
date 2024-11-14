@@ -1,47 +1,59 @@
 import { InitialLayout } from "../layouts/InitialLayout";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Loader } from "../components/Loader";
 
-const records = [
-  {
-    record: "1",
-    puntaje: "5 meses y 12 días",
-  },
-  {
-    record: "2",
-    puntaje: "4 meses y 20 días",
-  },
-  {
-    record: "3",
-    puntaje: "2 meses y 10 días",
-  },
-  {
-    record: "4",
-    puntaje: "1 meses y 14 días",
-  },
-  {
-    record: "5",
-    puntaje: "0 meses y 29 días",
-  },
-];
+const URL = "https://backend-rs-production.up.railway.app";
 
 export const Records = () => {
+  const [scores, setScores] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchScores = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(`${URL}/top-scores`);
+        setLoading(false);
+        setScores(data);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+        console.log(error);
+      }
+    };
+    fetchScores();
+  }, []);
+
+  if (loading || error)
+    return <Loader message="Cargando Datos.." error={error} />;
+
   return (
-    <InitialLayout tittle="Mejores Records" ret={true} mt="80px">
-      <table className="h-[80%] w-full border-separate border-black">
-        <thead className="bg-[#BA6060] text-center text-2xl text-white">
-          <tr>
-            <th>Rank</th>
-            <th>Puntuación</th>
-          </tr>
-        </thead>
-        <tbody className="bg-[#D9D9D9] text-center">
-          {records.map((record) => (
-            <tr key={record.record}>
-              <td>{record.record}</td>
-              <td>{record.puntaje}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </InitialLayout>
+    console.log(scores),
+    (
+      <InitialLayout tittle="Mejores Records" ret={true} mt="80px">
+        <div className="mt-[60px] flex max-h-[400px] w-[80%] flex-col items-center overflow-y-auto md:mt-[80px] md:w-[50%] lg:w-[40%]">
+          <table className="h-[80%] w-full border-separate border-black">
+            <thead className="bg-[#BA6060] text-center text-2xl text-white">
+              <tr>
+                <th>Rank</th>
+                <th>Puntuación</th>
+                <th>Pais</th>
+              </tr>
+            </thead>
+            <tbody className="bg-[#D9D9D9] text-center">
+              {scores.map((score, index) => (
+                <tr key={index}>
+                  <td>{score.jugador.usuario}</td>
+                  <td>{score.score}</td>
+                  <td>{score.jugador.pais}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </InitialLayout>
+    )
   );
 };

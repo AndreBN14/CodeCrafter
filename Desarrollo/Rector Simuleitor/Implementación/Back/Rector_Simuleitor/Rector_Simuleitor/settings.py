@@ -9,11 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 #import pymysql
 #pymysql.install_as_MySQLdb()
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +27,7 @@ SECRET_KEY = 'django-insecure-=qs^ruloqwk7q0e9p(!$ankgisty0h+11+jaxucv6%4_6b9^jo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['backend-rs-production.up.railway.app', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'Loggin.Jugador'
 
@@ -39,14 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'Apps.Core',
     'Apps.Loggin',
+    'Apps.api',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -88,6 +91,14 @@ DATABASES = {
         'PASSWORD': 'hVgmJjXgXzksNZPhVSqjoslvEhVsMXLN',
         'HOST': 'autorack.proxy.rlwy.net',  # Por ejemplo: '192.168.1.10'
         'PORT': '22756',  # El puerto por defecto de MySQL
+        'OPTIONS': {
+            #'ssl': {
+            #    'ca': os.path.join(direccionSLL,'ca-cert.pem'),
+            #    'cert': os.path.join(direccionSLL,'client-cert.pem'),
+            #    'key': os.path.join(direccionSLL,'client-key.pem'),
+            #    'ssl_verify_cert': False, 
+            #},
+        },
     }
 }
 
@@ -128,11 +139,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'https://rector-simulator.up.railway.app'
+]
 
+CRSF_TRUSTED_ORIGINS = [
+    'https://rector-simulator.up.railway.app'
 ]

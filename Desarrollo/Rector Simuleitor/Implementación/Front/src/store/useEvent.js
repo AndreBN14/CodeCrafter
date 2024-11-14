@@ -5,7 +5,7 @@ import journalist from "../assets/characters/journalist.svg";
 import { create } from "zustand";
 import axios from "axios";
 
-const URL = "http://localhost:8000";
+const URL = "https://backend-rs-production.up.railway.app";
 
 export const useEvent = create((set) => ({
   event: null,
@@ -16,8 +16,20 @@ export const useEvent = create((set) => ({
   getEvent: async (resource) => {
     set({ loading: true });
     try {
-      const { data } = await axios.post(`${URL}/api/generar-evento/`, resource);
+      const { data } = await axios.post(`${URL}/api/generar-evento`, resource);
       const personaje = data.personaje;
+
+      const unlockedCharacters =
+        JSON.parse(localStorage.getItem("unlockedCharacters")) || [];
+
+      if (!unlockedCharacters.includes(personaje)) {
+        unlockedCharacters.push(personaje);
+        localStorage.setItem(
+          "unlockedCharacters",
+          JSON.stringify(unlockedCharacters),
+        );
+      }
+
       switch (personaje) {
         case "estudiante":
           set({
@@ -60,4 +72,5 @@ export const useEvent = create((set) => ({
     }
   },
   startGame: () => set({ start: true }),
+  restartGame: () => set({ start: false }),
 }));
