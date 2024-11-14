@@ -5,6 +5,7 @@ import { ManagamentDays } from "../components/ManagamentDays";
 import { Desicion } from "../components/Decision";
 import { useEvent } from "../store/useEvent";
 import ud from "../assets/backgrounds/university-day.svg";
+import loadingGif from "../assets/others/bandr-unscreen.gif";
 
 export const Game = () => {
   const { error, loading } = useEvent();
@@ -13,7 +14,15 @@ export const Game = () => {
     return (
       <MainLayout background={ud} color="#C26464">
         <div className="flex h-full w-full items-center justify-center">
-          <p className="text-3xl text-white">{error ? error : "Cargando..."}</p>
+          {error ? (
+            <p className="text-3xl text-white">{error}</p>
+          ) : (
+            <img
+              className="h-1/2 w-1/2 object-contain"
+              src={loadingGif}
+              alt="Cargando..."
+            />
+          )}
         </div>
       </MainLayout>
     );
