@@ -29,7 +29,7 @@ export const Start = () => {
           getEvent({ dinero: 100, aprobacion: 100 });
         }}
       >
-        Continuar
+        Empezar
       </Link>
     </MainLayout>
   );

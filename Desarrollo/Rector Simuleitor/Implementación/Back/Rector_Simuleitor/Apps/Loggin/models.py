@@ -28,7 +28,7 @@ class Puntuacion(models.Model):
     score = models.PositiveBigIntegerField(db_column='puntuaciones') 
     fecha = models.DateField(default=date.today)
     dias = models.PositiveSmallIntegerField()
-    isTheBest = models.BooleanField()
+    # isTheBest = models.BooleanField(default=True)
     recursos_criticos = models.JSONField(default=dict, blank=True)
     jugador_id = models.ForeignKey(Jugador, on_delete=models.CASCADE,db_column="jugador_ID",related_name="puntajes")
 
@@ -50,17 +50,17 @@ class Puntuacion(models.Model):
         puntuacion_recursos = (dinero * 37) + (aprobacion * 53)
         self.score = puntuacion_dias + puntuacion_recursos 
 
-    def is_The_Best(self,jugador_id):
-        puntuaciones=list(Jugador.objects.get(jugador_id=jugador_id).puntajes.all())
-        if not puntuaciones: #osea es el primer registro entonce es el mejor
-            self.isTheBest=True
-        else:
-            puntuaciones=sorted(puntuaciones, key=lambda p: p.score) #orden ascendente
-            if self.score > puntuaciones[-1].score:
-                puntuaciones[-1].isTheBest = False #dejo de ser el mejor puntaje
-                self.is_The_Best = True
-            else:
-                self.is_The_Best = False
+    # def is_The_Best(self,jugador_id):
+    #     puntuaciones=list(Jugador.objects.get(jugador_id=jugador_id).puntajes.all())
+    #     if not puntuaciones: #osea es el primer registro entonce es el mejor
+    #         self.isTheBest=True
+    #     else:
+    #         puntuaciones=sorted(puntuaciones, key=lambda p: p.score) #orden ascendente
+    #         if self.score > puntuaciones[-1].score:
+    #             puntuaciones[-1].isTheBest = False #dejo de ser el mejor puntaje
+    #             self.is_The_Best = True
+    #         else:
+    #             self.is_The_Best = False
 
 
     def __str__(self):

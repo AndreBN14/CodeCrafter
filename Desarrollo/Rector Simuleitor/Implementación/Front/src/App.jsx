@@ -12,11 +12,13 @@ import { Menu } from "./pages/Menu";
 import { Records } from "./pages/Records";
 import { useAuth } from "./store/useAuth";
 import { Loader } from "./components/Loader";
+import { useDate } from "./store/useDate";
 
 function App() {
   const { start, event } = useEvent();
   const { money, people } = useResources();
-  const { user, loading, setUser, setToken } = useAuth();
+  const { user, loading: loadingAuth, error: errorAuth, setUser } = useAuth();
+  const { loading: loadingDate, error: errorDate } = useDate();
 
   useEffect(() => {
     if (event) {
@@ -28,14 +30,15 @@ function App() {
     const authdata = localStorage.getItem("authData");
     if (authdata) {
       const data = JSON.parse(authdata);
-      setUser(data.user);
-      setToken(data.token);
+      setUser(data);
     }
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+  if (loadingAuth || errorAuth)
+    return <Loader message="Validando Datos.." error={errorAuth} />;
+
+  if (loadingDate || errorDate)
+    return <Loader message="Cargando Datos.." error={errorDate} />;
 
   return (
     <Routes>
