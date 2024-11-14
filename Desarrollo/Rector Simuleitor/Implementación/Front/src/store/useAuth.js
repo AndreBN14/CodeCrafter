@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const URL = "http://localhost:8000";
+const URL = "https://backend-rs-production.up.railway.app";
 
 export const useAuth = create((set) => ({
   user: null,
