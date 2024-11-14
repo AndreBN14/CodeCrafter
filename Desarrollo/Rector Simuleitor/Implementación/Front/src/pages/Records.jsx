@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Loader } from "../components/Loader";
 
-const URL = "http://localhost:8000";
+const URL = "https://backend-rs-production.up.railway.app";
 
 export const Records = () => {
   const [scores, setScores] = useState([]);
