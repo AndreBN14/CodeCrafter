@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Apps.Loggin.views import register, login_view, top_scores
+from Apps.Loggin.views import register, login_view, top_scores, save_score
 from django.views.generic import RedirectView
 
 urlpatterns = [
@@ -26,4 +26,5 @@ urlpatterns = [
     path('', RedirectView.as_view(url='/loggin')), # Redirigir a loggin
     path('api/', include('Apps.api.urls')),
     path('top-scores/', top_scores),
+    path('save-score/', save_score),
 ]

@@ -4,21 +4,34 @@ import { useDate } from "../store/useDate";
 import { useResources } from "../store/useResources";
 import { useEvent } from "../store/useEvent";
 import { ButtonDe } from "./ui/ButtonDe";
+import { useAuth } from "../store/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const Desicion = () => {
-  const { incrementDate } = useDate();
-  const { money, people, impactMoney, impactPeople, setMoney, setPeople } =
-    useResources();
-  const { event, getEvent } = useEvent();
+  const {
+    money,
+    people,
+    impactMoney,
+    impactPeople,
+    reset: resetResources,
+  } = useResources();
+  const { event, getEvent, restartGame } = useEvent();
+  const { saveScore, reset: resetDate, incrementDate, day, month } = useDate();
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
 
   const outOfResources = () => {
     return money <= 0 || people <= 0;
   };
 
-  const consecuence = (resource, action) => {
+  const consecuence = (resource, action, back) => {
     if (outOfResources()) {
-      setMoney(100);
-      setPeople(100);
+      saveScore(user, money, people, day, month);
+      if (back) navigate("/");
+      resetResources();
+      resetDate();
+      restartGame();
     } else {
       resource === "dinero" ? impactMoney(action) : impactPeople(action);
       getEvent({ dinero: money, aprobacion: people });
@@ -36,6 +49,7 @@ export const Desicion = () => {
           consecuence(
             event.decision1.consecuencia.recurso,
             event.decision1.consecuencia.accion,
+            true,
           )
         }
         decision={event.decision1.decision}
@@ -48,6 +62,7 @@ export const Desicion = () => {
           consecuence(
             event.decision2.consecuencia.recurso,
             event.decision2.consecuencia.accion,
+            false,
           )
         }
         decision={event.decision2.decision}

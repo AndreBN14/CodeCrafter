@@ -11,12 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 #import pymysql
 #pymysql.install_as_MySQLdb()
-
-load_dotenv()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +27,7 @@ SECRET_KEY = 'django-insecure-=qs^ruloqwk7q0e9p(!$ankgisty0h+11+jaxucv6%4_6b9^jo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['backend-rs-production.up.railway.app', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'Loggin.Jugador'
 
@@ -42,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -52,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -141,6 +139,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -148,4 +150,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
+    'https://rector-simulator.up.railway.app'
+]
+
+CRSF_TRUSTED_ORIGINS = [
+    'https://rector-simulator.up.railway.app'
 ]

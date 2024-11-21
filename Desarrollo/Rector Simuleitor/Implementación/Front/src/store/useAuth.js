@@ -1,17 +1,17 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const URL = "http://localhost:8000";
+const URL = "https://backend-rs-production.up.railway.app";
 
 export const useAuth = create((set) => ({
   user: null,
-  token: null,
   loading: false,
+  error: null,
   register: async (user) => {
     try {
       set({ loading: true });
       const { data } = await axios.post(`${URL}/registrarse`, user);
-      set({ user: data.user, token: data.token });
+      set({ user: data });
 
       localStorage.setItem("authData", JSON.stringify(data));
 
@@ -20,13 +20,14 @@ export const useAuth = create((set) => ({
     } catch (error) {
       console.log(error);
       set({ loading: false });
+      set({ error: error.message });
     }
   },
   login: async (user) => {
     try {
       set({ loading: true });
       const { data } = await axios.post(`${URL}/loggin`, user);
-      set({ user: data.user, token: data.token });
+      set({ user: data });
 
       localStorage.setItem("authData", JSON.stringify(data));
 
@@ -35,6 +36,7 @@ export const useAuth = create((set) => ({
     } catch (error) {
       console.log(error);
       set({ loading: false });
+      set({ error: error.message });
     }
   },
   logout: () => {
@@ -45,11 +47,5 @@ export const useAuth = create((set) => ({
   },
   setUser: (user) => {
     set({ user });
-  },
-  setToken: (token) => {
-    set({ token });
-  },
-  setLoading: (loading) => {
-    set({ loading });
   },
 }));
