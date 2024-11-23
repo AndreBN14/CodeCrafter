@@ -1,42 +1,15 @@
 import { MainLayout } from "../layouts/MainLayout";
 import ua from "../assets/backgrounds/university-afternoon.svg";
 import { LockedCharacter } from "../components/LockedCharacter";
-import st from "../assets/characters/student.svg";
-import dc from "../assets/characters/dean.svg";
-import tc from "../assets/characters/teacher.svg";
-import jr from "../assets/characters/journalist.svg";
 import { useEffect, useState } from "react";
-
-const initialCharacters = [
-  {
-    name: "Decano",
-    img: dc,
-    unlock: false,
-  },
-  {
-    name: "Estudiante",
-    img: st,
-    unlock: false,
-  },
-  {
-    name: "Profesora",
-    img: tc,
-    unlock: false,
-  },
-  {
-    name: "Periodista",
-    img: jr,
-    unlock: false,
-  },
-];
+import initialCharacters from "../constants/characters";
 
 export const Characters = () => {
   const [characters, setCharacters] = useState(initialCharacters);
 
   useEffect(() => {
-    const unlockedCharacters = JSON.parse(
-      localStorage.getItem("unlockedCharacters"),
-    );
+    const unlockedCharacters =
+      JSON.parse(localStorage.getItem("unlockedCharacters")) || [];
     if (unlockedCharacters) {
       const updatedCharacters = characters.map((character) => {
         if (unlockedCharacters.includes(character.name.toLowerCase())) {
