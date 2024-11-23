@@ -1,0 +1,10 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+<svg fill="#757575" width="800px" height="800px" viewBox="0 0 24 24" id="money-dollar-coin" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color">
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="SVGRepo_iconCarrier">
+<circle id="primary" cx="12" cy="12" r="10" style="fill: #757575;"/>
+<path id="secondary" d="M12.5,11h-1a.5.5,0,0,1,0-1H14a1,1,0,0,0,0-2H13a1,1,0,0,0-2,0v.05A2.5,2.5,0,0,0,11.5,13h1a.5.5,0,0,1,0,1H10a1,1,0,0,0,0,2h1a1,1,0,0,0,2,0V16A2.5,2.5,0,0,0,12.5,11Z" style="fill: #fafafa;"/>
+</g>
+</svg>
