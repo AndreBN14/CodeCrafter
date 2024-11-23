@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-
-const URL = "https://backend-rs-production.up.railway.app";
+import URL from "../constants/URL";
 
 export const useDate = create((set) => ({
   day: 1,

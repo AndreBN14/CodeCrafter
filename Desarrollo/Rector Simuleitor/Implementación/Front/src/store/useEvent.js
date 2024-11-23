@@ -4,8 +4,7 @@ import teacher from "../assets/characters/teacher.svg";
 import journalist from "../assets/characters/journalist.svg";
 import { create } from "zustand";
 import axios from "axios";
-
-const URL = "https://backend-rs-production.up.railway.app";
+import URL from "../constants/URL";
 
 export const useEvent = create((set) => ({
   event: null,
