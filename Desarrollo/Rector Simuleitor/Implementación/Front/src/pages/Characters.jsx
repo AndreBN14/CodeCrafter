@@ -29,6 +29,31 @@ const initialCharacters = [
     img: jr,
     unlock: false,
   },
+  {
+    name: "Centro Federado",
+    // img: cf, // Imagen aún no asignada
+    unlock: false,
+  },
+  {
+    name: "Profesor",
+    // img: pf, // Imagen aún no asignada
+    unlock: false,
+  },
+  {
+    name: "Evento Favorable",
+    // img: ef, // Imagen aún no asignada
+    unlock: false,
+  },
+  {
+    name: "Jire Román",
+    //img: jrNemesis, // Asumiendo que ya tienes una imagen para Jire Román
+    unlock: false,
+  },
+  {
+    name: "Secuases",
+    // img: sc, // Imagen aún no asignada
+    unlock: false,
+  },
 ];
 
 export const Characters = () => {

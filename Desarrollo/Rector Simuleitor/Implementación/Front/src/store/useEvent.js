@@ -5,7 +5,7 @@ import journalist from "../assets/characters/journalist.svg";
 import { create } from "zustand";
 import axios from "axios";
 
-const URL = "https://backend-rs-production.up.railway.app";
+const URL = "http://127.0.0.1:8000/";
 
 export const useEvent = create((set) => ({
   event: null,
