@@ -2,8 +2,7 @@ import { InitialLayout } from "../layouts/InitialLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Loader } from "../components/Loader";
-
-const URL = "https://backend-rs-production.up.railway.app";
+import URL from "../constants/URL";
 
 export const Records = () => {
   const [scores, setScores] = useState([]);

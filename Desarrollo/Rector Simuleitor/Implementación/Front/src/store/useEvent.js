@@ -1,11 +1,7 @@
-import student from "../assets/characters/student.svg";
-import dean from "../assets/characters/dean.svg";
-import teacher from "../assets/characters/teacher.svg";
-import journalist from "../assets/characters/journalist.svg";
 import { create } from "zustand";
 import axios from "axios";
-
-const URL = "http://127.0.0.1:8000/";
+import URL from "../constants/URL";
+import characters from "../constants/characters";
 
 export const useEvent = create((set) => ({
   event: null,
@@ -30,42 +26,21 @@ export const useEvent = create((set) => ({
         );
       }
 
-      switch (personaje) {
-        case "estudiante":
-          set({
-            character: {
-              name: "Estudiante",
-              img: student,
-            },
-          });
-          break;
-        case "profesora":
-          set({
-            character: {
-              name: "Profesora",
-              img: teacher,
-            },
-          });
-          break;
-        case "periodista":
-          set({
-            character: {
-              name: "Periodista",
-              img: journalist,
-            },
-          });
-          break;
-        case "decano":
-          set({
-            character: {
-              name: "Decano",
-              img: dean,
-            },
-          });
-          break;
-        default:
-          set({ error: "No se encontró el personaje" });
+      const character = characters.find(
+        (character) => character.name.toLowerCase() === personaje,
+      );
+
+      if (character) {
+        set({
+          character: {
+            name: character.name,
+            img: character.img,
+          },
+        });
+      } else {
+        set({ error: "Personaje no encontrado" });
       }
+
       set({ event: data, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
