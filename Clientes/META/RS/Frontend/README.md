@@ -1,8 +1,12 @@
-# React + Vite
+# Instrucciones para la ejecución del Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. **Instalar dependencias**  
+   Antes de ejecutar el proyecto, asegúrate de tener todas las dependencias necesarias instaladas. Para ello, ejecuta el siguiente comando en el directorio raíz del proyecto:
 
-Currently, two official plugins are available:
+   ```bash
+   npm install
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. **Ejecutar el servidor del Frontend**
+   Una vez que las dependencias estén instaladas, puedes iniciar el servidor de desarrollo con el siguiente comando:
+   ```bash
+   npm run dev
