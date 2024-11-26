@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 import URL from "../constants/URL";
 import characters from "../constants/characters";
-
+import Desconocido from "../assets/characters/desconocido.svg";
 export const useEvent = create((set) => ({
   event: null,
   error: null,
@@ -27,9 +27,11 @@ export const useEvent = create((set) => ({
       }
 
       const character = characters.find(
-        (character) => character.name.toLowerCase() === personaje,
-      );
-
+        (character) => character.name.toLowerCase() === personaje) || {
+          name: "Desconocido",
+          img: Desconocido,
+        };
+        console.log(character);
       if (character) {
         set({
           character: {
