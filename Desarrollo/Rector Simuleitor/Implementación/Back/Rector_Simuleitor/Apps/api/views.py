@@ -12,7 +12,7 @@ client = OpenAI()
 class ChatGPTAPIView(APIView):
 
     def ramdomizador(self):
-        personajes = ["profesora","estudiante","periodista","decano","centro federado","profesor","el personaje se llama "'buenas noticias'" y puede ser por ejemplo aumento en reputacion por descubrimiento cientifico, buena gestión, mejora en infraestructura, etc"]
+        personajes = ["profesora","estudiante","periodista","decano","centro federado","profesor","buenas noticias"]
         personaje_ramdom=random.choice(personajes)
         return personaje_ramdom    
 
@@ -26,10 +26,11 @@ class ChatGPTAPIView(APIView):
         aprobacion = user_input.get("aprobacion")
 
         contexto_general = """Eres un generador de eventos para el juego Rector Simulator, el cual
-                            consiste en que el jugador intente mantenerse en el cargo de rector de la Universidad Nacional Mayor de San Marcos durante
+                            consiste en que el jugador intente mantenerse en el cargo de rector durante
                             el mayor tiempo posible y tu te encargas de generar escenarios aleatorios tanto positivos como negativos 
                             que afecten su permanencia donde los recursos son dinero y aprobacion. En el juego utilizamos personajes que 
                             son los protegonistas de los eventos, cuando los generes considera el personaje y crea un evento que lo involucre.
+                            Ocasionalmente ocurren buenas noticias que pueden ser por ejemplo aumento en reputacion gracias a descubrimiento cientifico, buena gestión, mejora en infraestructura, etc.
                             """
         
         contexto_nemesis = """Considera ademas que el rector tiene un némesis llamado Jire Román, el cual
@@ -117,7 +118,7 @@ class ChatGPTAPIView(APIView):
                 model="gpt-4o-mini",  # O el modelo que estés usando
                 messages= [{"role": "system", "content": prompt}],
                 max_tokens=500,
-                temperature=1,
+                temperature=0.8,
             )
             
             # Obtener la respuesta del modelo
