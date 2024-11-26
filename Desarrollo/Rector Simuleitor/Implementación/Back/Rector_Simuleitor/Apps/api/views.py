@@ -27,15 +27,13 @@ class ChatGPTAPIView(APIView):
 
         contexto_general = """Eres un generador de eventos para el juego Rector Simulator, el cual
                             consiste en que el jugador intente mantenerse en el cargo de rector durante
-                            el mayor tiempo posible y tu te encargas de generar escenarios aleatorios tanto positivos como negativos 
+                            el mayor tiempo posible y tu te encargas de generar escenarios aleatorios tanto negativos como positvos
                             que afecten su permanencia donde los recursos son dinero y aprobacion. En el juego utilizamos personajes que 
                             son los protegonistas de los eventos, cuando los generes considera el personaje y crea un evento que lo involucre.
-                            Ocasionalmente ocurren buenas noticias que pueden ser por ejemplo aumento en reputacion gracias a descubrimiento cientifico, buena gestión, mejora en infraestructura, etc.
                             """
         
         contexto_nemesis = """Considera ademas que el rector tiene un némesis llamado Jire Román, el cual
-                                me tiene rencor porque le ganamos las elecciones universitarias para ergime 
-                                como rector pues mediante una investigación demostramos con mi equipo que su partido
+                                me tiene rencor porque le ganamos las elecciones universitarias, pues demostre que su partido
                                 era corrupto y por ello el al ser su cabecilla tuvo que separse de la universidad
                                 pero todavia anhela el poder por lo que mediante sus operadores politicos tanto dentro como fuera
                                 de la universidad busca deshacreditarnos, para que me hechen del cargo.
@@ -52,7 +50,7 @@ class ChatGPTAPIView(APIView):
             Tu respuesta debe seguir la estructura JSON indicada abajo, no agregues markdows a tu respuesta, solo necesito el JSON: 
             {regla}
             {{
-                "evento": "Descripción corta del evento pero que mantenga detalles. cuando hables del rector usa segunda persona considerando al jugador como el rector",
+                "evento": "Descripción corta del evento pero que mantenga detalles. Se creativo con los intentos de sabotage de Jire. cuando hables del rector usa segunda persona considerando al jugador como el rector",
                 "personaje": "jire román" | "secuases",
                 "decision1": {{
                     "decision": "Descripción de la primera decision basada en el evento.",
@@ -73,37 +71,67 @@ class ChatGPTAPIView(APIView):
 
         else:
             pj=self.ramdomizador()
-            
-            prompt = f"""
-            {contexto_general}
-            Tu respuesta debe seguir la estructura JSON indicada abajo, no agregues markdows a tu respuesta, solo necesito el JSON:
+            if pj == "buenas noticias":
+                prompt = f"""
+                {contexto_general}
+                {regla}
+                Tu respuesta debe seguir la estructura JSON indicada abajo, no agregues markdows a tu respuesta, solo necesito el JSON:
 
-            {{
-                "evento": "Descripción corta del evento.",
-                "personaje": {pj},
-                "decision1": {{
-                    "decision": "Descripción de la primera decision basada en el evento. cuando hables del rector usa segunda persona",
-                    "consecuencia": {{
-                        "recurso": "aprobacion" | "dinero",
-                        "accion": "Número entre -20 y 20"
-                    }}
-                }},
-                "decision2": {{
-                    "decision": "Descripción de la segunda decision basada en el evento.",
-                    "consecuencia": {{
-                        "recurso": "aprobacion" | "dinero",
-                        "accion": "Número entre -20 y 20"
+                {{
+                    "evento": "Descripción corta del evento. Se creativo",
+                    "personaje": {pj},
+                    "decision1": {{
+                        "decision": "Descripción de la primera decision basada en el evento. cuando hables del rector usa segunda persona",
+                        "consecuencia": {{
+                            "recurso": "aprobacion" | "dinero",
+                            "accion": "Número entre -20 y 20"
+                        }}
+                    }},
+                    "decision2": {{
+                        "decision": "Descripción de la segunda decision basada en el evento.",
+                        "consecuencia": {{
+                            "recurso": "aprobacion" | "dinero",
+                            "accion": "Número entre -20 y 20"
+                        }}
                     }}
                 }}
-            }}
 
             Los recursos actuales son:
         - Dinero: ${dinero}
         - Aprobacion: ${aprobacion}
 
-        Genera eventos que consideren este estado, sabiendo que el maximo en ambos es 100. 
+        Genera un evento de buenas noticias considerando que pueden ser por ejemplo aumento en reputacion gracias a descubrimiento cientifico, buena gestión, mejora en infraestructura, etc. Sabiendo que el maximo en ambos recursos es 100. 
             """
+            else:
+                prompt = f"""
+                {contexto_general}
+                {regla}
+                Tu respuesta debe seguir la estructura JSON indicada abajo, no agregues markdows a tu respuesta, solo necesito el JSON:
 
+                {{
+                    "evento": "Descripción corta del evento. Se creativo",
+                    "personaje": {pj},
+                    "decision1": {{
+                        "decision": "Descripción de la primera decision basada en el evento. cuando hables del rector usa segunda persona",
+                        "consecuencia": {{
+                            "recurso": "aprobacion" | "dinero",
+                            "accion": "Número entre -20 y 20"
+                        }}
+                    }},
+                    "decision2": {{
+                        "decision": "Descripción de la segunda decision basada en el evento.",
+                        "consecuencia": {{
+                            "recurso": "aprobacion" | "dinero",
+                            "accion": "Número entre -20 y 20"
+                        }}
+                    }}
+                }}
+
+            Los recursos actuales son:
+        - Dinero: ${dinero}
+        - Aprobacion: ${aprobacion}
+        Genera un evento considerando que el maximo en ambos recursos es 100. 
+        """
         try:
 
             if evento_nemesis <= 0.2:
@@ -111,14 +139,14 @@ class ChatGPTAPIView(APIView):
                 model="gpt-4o-mini",  # O el modelo que estés usando
                 messages= [{"role": "system", "content": prompt}],
                 max_tokens=500,
-                temperature=1,
+                temperature=0.9,
             )
             else:
                 completion = client.chat.completions.create(
                 model="gpt-4o-mini",  # O el modelo que estés usando
                 messages= [{"role": "system", "content": prompt}],
                 max_tokens=500,
-                temperature=0.8,
+                temperature=0.7,
             )
             
             # Obtener la respuesta del modelo
