@@ -12,7 +12,7 @@ client = OpenAI()
 class ChatGPTAPIView(APIView):
 
     def ramdomizador(self):
-        personajes = ["profesora","estudiante","periodista","decano","centro federado","profesor","buenas noticias"]
+        personajes = ["profesora","estudiante","periodista","decano","centro federado","profesor","buenas noticias","policia"]
         personaje_ramdom=random.choice(personajes)
         return personaje_ramdom    
 
@@ -134,7 +134,7 @@ class ChatGPTAPIView(APIView):
         """
         try:
 
-            if evento_nemesis <= 0.2:
+            if evento_nemesis <= 0.15:
                 completion = client.chat.completions.create(
                 model="gpt-4o-mini",  # O el modelo que estés usando
                 messages= [{"role": "system", "content": prompt}],
