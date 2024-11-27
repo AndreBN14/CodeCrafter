@@ -6,38 +6,54 @@ import Jire from "../assets/characters/Jire.svg";
 import Secuas from "../assets/characters/Secuas.svg";
 import Desconocido from "../assets/characters/desconocido.svg";
 import BuenasNoticias from "../assets/characters/BuenasNoticias.svg";
+import profesor from "../assets/characters/Profesor.svg"
+import centro from "../assets/characters/CentroFederado.svg"
+import policia from "../assets/characters/policia.svg"
+
 const characters = [
   {
-    name: "Decano",
+    name: "Decano", //yala
     img: dean,
   },
   {
-    name: "Estudiante",
+    name: "Estudiante", //yala
     img: student,
   },
   {
-    name: "Profesora",
+    name: "Profesora", //yalo
     img: teacher,
   },
   {
-    name: "Periodista",
+    name: "Profesor", //yala
+    img: profesor,
+  },
+  {
+    name: "Periodista", //yala
     img: journalist,
   },
   {
-    name: "Jire Román",
+    name: "Jire Román", //yala
     img: Jire,
   },
   {
-    name: "Secuases",
+    name: "Secuases", //yala
     img: Secuas,
   },
   {
-    name: "Desconocido",
+    name: "Desconocido", //yala
     img: Desconocido,
   },
   {
-    name: "Buenas Noticias",
+    name: "Buenas Noticias", //yala
     img: BuenasNoticias,
+  },
+  {
+    name: "Centro Federado", //yala
+    img: centro,
+  },
+  {
+    name: "Policia", //yala
+    img: policia,
   },
 ];
 

@@ -36,9 +36,9 @@ export const Records = () => {
           <table className="h-[80%] w-full border-separate border-black">
             <thead className="bg-[#BA6060] text-center text-2xl text-white">
               <tr>
-                <th>Rank</th>
+                <th>Ranking</th>
                 <th>Puntuación</th>
-                <th>Pais</th>
+                <th>País</th>
               </tr>
             </thead>
             <tbody className="bg-[#D9D9D9] text-center">
