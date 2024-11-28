@@ -4,10 +4,10 @@ import soundEffectFile from "../assets/audio/Swish _ OMORI SFX [ ezmp3.cc ].mp3"
 
 export const useConfig = create((set) => {
   const musicAudio = new Audio(musicFile); // Audio para la música
-  musicAudio.volume = 0.2; // Ajustar el volumen de la música
+  musicAudio.volume = 0.08; // Ajustar el volumen de la música
 
   const soundEffectAudio = new Audio(soundEffectFile); // Audio para efectos de sonido
-  soundEffectAudio.volume = 0.9; // Ajustar el volumen del efecto de sonido
+  soundEffectAudio.volume = 0.6; // Ajustar el volumen del efecto de sonido
 
   return {
     playMusic: false,
