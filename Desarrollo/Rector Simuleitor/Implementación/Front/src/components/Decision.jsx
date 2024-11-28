@@ -42,7 +42,7 @@ export const Desicion = () => {
   };
 
   return (
-    <div className="my-3 flex h-1/6 justify-around">
+    <div className="my-3 flex h-1/6 w-[100%] max-w-[100%] flex-wrap justify-around overflow-y-auto rounded-[10px] bg-[#D9D9D9] p-4">
       <ButtonDe
         bg="red"
         onClick={() =>
